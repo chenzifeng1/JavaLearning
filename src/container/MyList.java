@@ -18,7 +18,6 @@ import java.util.Random;
 public class MyList {
     private static final int seed = 822;//随机数种子
 
-
     private List<Integer> myList;
     private Random random;
 
@@ -36,8 +35,6 @@ public class MyList {
         while((num--)>0){
             myList.add(random.nextInt());
         }
-
-
     }
 
 
