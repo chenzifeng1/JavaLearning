@@ -13,6 +13,12 @@ package interview;
 
 class Solution {
     public int countDigitOne(int n) {
+        String numStr = Integer.toString(n);
+        int e = numStr.length();
+        while ((e--)>0){
+
+        }
         return 0;
+
     }
 }

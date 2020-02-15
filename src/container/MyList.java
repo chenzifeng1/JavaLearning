@@ -19,11 +19,11 @@ public class MyList {
     private static final int seed = 822;//随机数种子
 
     private List<Integer> myList;
-    private Random random;
+    private Random  random;
 
     public MyList() {
     }
-
+    
     public MyList(int num,int kind) {   //标志耦合，耦合度太高
         if (num<=0)
             return;
