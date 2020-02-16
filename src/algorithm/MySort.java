@@ -1,6 +1,8 @@
 package algorithm;
 
 
+import container.RandomArray;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -12,9 +14,12 @@ import java.util.Stack;
 public class MySort {
     Stack<Integer> integerStack = new Stack<Integer>();
     LinkedList linkedList = new LinkedList();
-    ArrayList<Integer> integerArrayList;
+    private static ArrayList<Integer>  integerArrayList = new RandomArray().getRandomArray();
 
     public MySort() {
-       // if ()
+    }
+
+    public static void quickSort(){
+
     }
 }
