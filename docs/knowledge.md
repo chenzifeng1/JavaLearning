@@ -71,3 +71,49 @@ public class Test<Type>{
     }
 }
 ``` 
+#### ==和equals()
+==是判断两个对象的地址是否相同，而equals是判断两个对象的内容是否相同。以String对象为例  
+```java
+public class test{ 
+    String str1 = "a";
+    String str2 = new String(a);
+}
+```
+对于String而言，对象str1是一个常量，其值a的地址存储在常量池中，而str2存储在系统分配的堆中。
+另外对于java来说我们不能得到对象的实际内存地址，因为java中的堆是由JVM管理的，但是我们可以通过hashcode()这个方法来查看两者的地址关系，JVM回通过哈希码在真正的内存堆中给对象分配地址。但是不意味着哈希码相同，对象的地址就相同了。
+我们可以看一下string.hashcode()和String.equals()的源码。  
+```java
+public final class String{
+    public int hashCode() {
+        int h = hash;
+        if (h == 0 && !hashIsZero) {
+            h = isLatin1() ? StringLatin1.hashCode(value)
+                           : StringUTF16.hashCode(value);
+            if (h == 0) {
+                hashIsZero = true;
+            } else {
+                hash = h;
+            }
+        }
+        return h;
+    }
+
+    public boolean equals(Object anObject) {
+        if (this == anObject) {
+            return true;
+        }
+        if (anObject instanceof String) {
+            String aString = (String)anObject;
+            if (!COMPACT_STRINGS || this.coder == aString.coder) {
+                return StringLatin1.equals(value, aString.value);
+            }
+        }
+        return false;
+    }
+
+}
+```
+hashCode() 的作用是获取哈希码，也称为散列码；它实际上是返回一个int整数。这个哈希码的作用是确定该对象在哈希表中的索引位置。hashCode() 定义在JDK的Object.java中，这就意味着Java中的任何类都包含有hashCode() 函数。
+在string的hashcode()中，判断编码方式是Latin还是UTF16然后交给对应的类去编码。而在equals中，先判断两者地址是否相同，如果相同那么两者必然相同。若是不相同，继续判断内容是否相同
+
+关于hashcode()的作用：hashset检查插入元素是否重复时首先得到插入对象的。每个Java类都包含hashCode() 函数。但是，仅仅当创建并某个“类的散列表”(关于“散列表”见下面说明)时，该类的hashCode() 才有用

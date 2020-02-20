@@ -1,9 +1,6 @@
 package container;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 /**
  *List接口在Collection的基础上增加了大量方法，使其可以在list中间增加和删除元素
@@ -20,7 +17,7 @@ public class MyList {
 
     private List<Integer> myList;
     private Random  random;
-
+    private HashSet<String> strings;
     public MyList() {
     }
     
