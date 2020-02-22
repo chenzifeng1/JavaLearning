@@ -1,10 +1,21 @@
 package knowledge;
 
+import java.awt.*;
+import java.util.Scanner;
+
 public class Test {
     Generic<Integer> integerGeneric = new Generic<>(10);
 
 
+
     public static void main(String args[]){
+        Scanner input = new Scanner(System.in);
+        String str = input.nextLine();
+        
+        System.out.println(throwableTest(Integer.valueOf(str)));
+    }
+
+    public static void equalsTest(){
         String a = "ab";
         String b = new String("ab");
         String c = new String("ab");
@@ -31,7 +42,15 @@ public class Test {
         }else {
             System.out.println("a equal c is false");
         }
+    }
 
+    public static int throwableTest(int value){
+        try{
+            return value*2;
+        }finally {
+            if(value == 0 )
+                return 1;
+        }
     }
 
 }
