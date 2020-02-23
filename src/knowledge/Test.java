@@ -1,6 +1,9 @@
 package knowledge;
 
 import java.awt.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Scanner;
 
 public class Test {
@@ -44,6 +47,11 @@ public class Test {
         }
     }
 
+    /**
+     * 异常类：在try内的返回之前会首先执行finally的代码
+     * @param value
+     * @return
+     */
     public static int throwableTest(int value){
         try{
             return value*2;
@@ -52,5 +60,6 @@ public class Test {
                 return 1;
         }
     }
+
 
 }

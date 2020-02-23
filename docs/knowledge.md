@@ -117,3 +117,32 @@ hashCode() 的作用是获取哈希码，也称为散列码；它实际上是返
 在string的hashcode()中，判断编码方式是Latin还是UTF16然后交给对应的类去编码。而在equals中，先判断两者地址是否相同，如果相同那么两者必然相同。若是不相同，继续判断内容是否相同
 
 关于hashcode()的作用：hashset检查插入元素是否重复时首先得到插入对象的。每个Java类都包含hashCode() 函数。但是，仅仅当创建并某个“类的散列表”(关于“散列表”见下面说明)时，该类的hashCode() 才有用
+
+
+
+## Java的I/O流
+ - 按流向划分分为：输入流和输出流
+ - 按操作单元划分：字节流和字符流
+ - 按流的角色划分：节点流和处理流
+输入流有两种：InputStream(字节流)和Reader(字符流)  
+![输入流示例](../src/knowledge/MyInput.java)
+```java
+public class input{
+    public String inputFirstWay(){
+        Scanner input = new Scanner(System.in);
+        return input.nextLine();
+    }
+    
+    public String inputSecondWay(){
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in)); 
+        String s = input.readLine(); 
+        reuturn s;
+    }   
+}
+```
+输出流有两种：OutputStream(字节流)和Writer(字符流)
+```java
+public class output{
+    
+}
+```
