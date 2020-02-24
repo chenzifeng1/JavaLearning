@@ -55,7 +55,7 @@ public class MyInput {
     /**
      * 文件输出：注意文件的编码格式要为UTF-8，不然会出现乱码
      */
-    public String fileOutput(String fileName) {
+    public String fileInput(String fileName) {
         String fileContent = " ";
         try {
             String strRead = null;

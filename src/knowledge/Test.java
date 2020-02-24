@@ -16,7 +16,7 @@ public class Test {
 //        String str = input.nextLine();
         MyInput myInput = new MyInput();
 
-        myInput.fileOutput("C:\\Users\\Administrator\\Desktop\\test.txt");
+        myInput.fileInput("C:\\Users\\Administrator\\Desktop\\test.txt");
 
     }
 
