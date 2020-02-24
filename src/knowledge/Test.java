@@ -12,10 +12,12 @@ public class Test {
 
 
     public static void main(String args[]){
-        Scanner input = new Scanner(System.in);
-        String str = input.nextLine();
-        
-        System.out.println(throwableTest(Integer.valueOf(str)));
+//        Scanner input = new Scanner(System.in);
+//        String str = input.nextLine();
+        MyInput myInput = new MyInput();
+
+        myInput.fileOutput("C:\\Users\\Administrator\\Desktop\\test.txt");
+
     }
 
     public static void equalsTest(){

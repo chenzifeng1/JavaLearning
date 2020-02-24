@@ -125,7 +125,7 @@ hashCode() 的作用是获取哈希码，也称为散列码；它实际上是返
  - 按操作单元划分：字节流和字符流
  - 按流的角色划分：节点流和处理流
 输入流有两种：InputStream(字节流)和Reader(字符流)  
-![输入流示例](../src/knowledge/MyInput.java)
+[Input的类](https://github.com/chenzifeng1/JavaLearning/blob/master/src/knowledge/MyInput.java)
 ```java
 public class input{
     public String inputFirstWay(){
