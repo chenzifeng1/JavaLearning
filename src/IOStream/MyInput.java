@@ -1,6 +1,7 @@
-package knowledge;
+package IOStream;
 
 import java.io.*;
+import java.util.InvalidPropertiesFormatException;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
@@ -45,6 +46,7 @@ public class MyInput {
 
     /**
      * Reader：字符流
+     *
      * @return
      */
     public static String inputSecondWay() throws IOException {
@@ -55,16 +57,15 @@ public class MyInput {
     /**
      * 文件输出：注意文件的编码格式要为UTF-8，不然会出现乱码
      */
-    public String fileInput(String fileName) {
+    public String fileReader(String fileName) {
         String fileContent = " ";
         try {
             String strRead = null;
             fileReader = new FileReader(fileName);
             int ch = fileReader.read();
-
             StringBuilder str = new StringBuilder();
-            while(ch!=-1){
-                str.append((char)ch);
+            while (ch != -1) {
+                str.append((char) ch);
                 ch = fileReader.read();
             }
             fileContent = str.toString();
@@ -78,13 +79,36 @@ public class MyInput {
                 try {
                     fileReader.close();
 
-                } catch (IOException e){
+                } catch (IOException e) {
                     throw new RuntimeException("关闭失败");
                 }
             }
         }
-    return fileContent;
+        return fileContent;
     }
 
+    public String fileInput(String fileName) {
+        StringBuilder fileContent = new StringBuilder();
+        try {
+            inputStream = new FileInputStream(fileName);
+            BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+            String str = null;
+            while(( str= br.readLine())!=null){
+                System.out.println(str);
+                fileContent.append(str);
+            }        } catch (FileNotFoundException e) {
+            logger.warning(e.getMessage());
+        } catch (IOException e) {
+            logger.warning(e.getMessage());
+        } finally {
+            try {
+                inputStream.close();
+            } catch (IOException e) {
+                logger.warning(e.getMessage());
+            }
+        }
+
+        return fileContent.toString();
+    }
 
 }

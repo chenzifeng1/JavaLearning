@@ -1,4 +1,4 @@
-package knowledge;
+package IOStream;
 
 import java.io.OutputStream;
 

@@ -23,6 +23,8 @@ public class RandomArray {
      * @param length
      */
     public RandomArray(int length) {
+        if(randomArray==null)
+            randomArray  = new ArrayList<Integer>();
         if (length < 0) {
             length = defaultLength;
         }
