@@ -15,7 +15,7 @@
     - [Arrays](#Arrays)
     - [AbstractCollection](#AbstractCollection)
 
-### Collection的方法
+## Collection的方法
 #### 排序
     void reverse(List list)//反转  
     void shuffle(List list)//随机排序  
@@ -95,5 +95,22 @@ public class LinkedList<E>{
 - 关于插入和查询  
     两者在插入和查询方面的区别就是数组与链表在插入和查询中的表现了。ArrayList代表数组，可以实现随机查询，查询时间复杂度为O(1)。ArrayList默认是尾插，即在执行add(E e)方法时新
     进入的元素在数组尾部，此操作的时间复杂度为O(1)，但是如果执行add(int index, E element)时，使用了数组拷贝来留出要插入的元素的位置。时间复杂度为O(N-i)。
-    而LinkedList因为使用链表的数据结构，所以在插入时只需要改变前后的引用指向即可，插入的时间复杂度为O(1)。但是由于遍历必须为顺序遍历，想得到某个元素必须从头部或尾部进行，所以时间复杂度为O(n).
+    而LinkedList因为使用链表的数据结构，所以在插入时只需要改变前后的引用指向即可，插入的时间复杂度为O(1)。但是由于遍历必须为顺序遍历，想得到某个元素必须从头部或尾部进行，所以时间复杂度为O(n)。
+- 关于内存空间消耗  
+    ArrayList的空间浪费主要是因为会在数组后面预留一定的容量空间。而LinkedList的每一个元素都会有前序后继的引用占空间。
     
+## 相关内容
+- 关于RandomAccess()接口，该接口的作用更大是一个标识，标志着实现该接口的类可以随机访问元素。
+- ArrayList中有一个方法ensureCapacity(int minCapacity),这个是提供给用户使用的，在新增大量元素之前使用这个方法可以减少增量重新分配的次数。
+```java
+public class ArrayList{
+    public void ensureCapacity(int minCapacity) {
+        if (minCapacity > elementData.length
+            && !(elementData == DEFAULTCAPACITY_EMPTY_ELEMENTDATA
+                 && minCapacity <= DEFAULT_CAPACITY)) {
+            modCount++;
+            grow(minCapacity);
+        }
+    }
+}
+```
