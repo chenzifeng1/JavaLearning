@@ -114,3 +114,4 @@ public class ArrayList{
     }
 }
 ```
+- jdk1.8之后hashmap解决冲突的方法发生了改变，在达到链表阈值之后转为红黑树来减少搜索时间
