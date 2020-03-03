@@ -24,3 +24,5 @@ public class ArrayList<E> extends AbstractList<E>
 - elementData：ArrayList的底层实现，就是一个Object数组，这个变量就是来存储ArrayList元素的缓冲区，ArrayList的容量就是这个缓冲区的长度。此变量被transient所修饰，即该变量不会被序列化存储到磁盘，只会在内存中驻留。当然有相应的方法将elementData写入内存。
 - size：ArrayList实例中元素的长度。
 ### 核心方法介绍
+主要介绍两个构造方法以及扩容方法 
+[ArrayList源码分析](https://github.com/chenzifeng1/JavaLearning/blob/master/src/container/ArrayList/MyArrayList.java)
