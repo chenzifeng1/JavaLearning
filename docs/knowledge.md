@@ -150,3 +150,29 @@ public class output{
 ## 浅拷贝和深拷贝
     浅拷贝：对基本数据类型进行值传递，对引用数据类型进行引用传递般的拷贝，此为浅拷贝。
     深拷贝：对基本数据类型进行值传递，对引用数据类型，创建一个新的对象，并复制其内容，此为深拷贝。
+    
+## 数组拷贝函数
+ 在Arrays类有关拷贝的函数  
+ 返回类型：返回一个泛型数组
+ 参数：
+ 1. U[] original ：泛型数组，需要拷贝的目的数组
+ 2. int newLength：拷贝的长度
+ 3. Class<? extends T[]> newType ：返回的数组类型
+  
+  
+ ```java
+public class Arrays{
+
+   public static <T,U> T[] copyOf(U[] original, int newLength, Class<? extends T[]> newType) {
+        @SuppressWarnings("unchecked")
+        T[] copy = ((Object)newType == (Object)Object[].class)
+            ? (T[]) new Object[newLength]
+            : (T[]) Array.newInstance(newType.getComponentType(), newLength);
+        System.arraycopy(original, 0, copy, 0,
+                         Math.min(original.length, newLength));
+        return copy;
+    }  
+  
+}
+```
+ 
