@@ -159,7 +159,6 @@ public class output{
  2. int newLength：拷贝的长度
  3. Class<? extends T[]> newType ：返回的数组类型
   
-  
  ```java
 public class Arrays{
 
@@ -176,3 +175,23 @@ public class Arrays{
 }
 ```
  
+## Arrays.asList()
+Arrays.asList()是泛型方法，传入的对象必须是对象数组。
+当传入一个基本数据类型数组时，Arrays.asList() 的真正得到的参数就不是数组中的元素，而是数组对象本身。
+Arrays.asList() 方法返回的并不是 java.util.ArrayList ，而是 java.util.Arrays 的一个内部类,这个内部类并没有实现集合的修改方法或者说并没有重写这些方法。  
+将Array转为真正的ArrayList有一下几种方法
+```java 
+public class ArrayToList{
+    public static void main(String args[]){
+    Array array = new Array({1,2,3});
+    ArrayList arys = new ArrayList<>(array.asList());   //利用ArrayList的构造方法来实现
+    
+    
+    
+    }
+}
+```
+
+## fail-fast与fail-safe机制
+两者都是为了应对列表并发修改出错引入的模式。fail-fast在多线程修改列表结构时会抛出ConcurrentModificationException(并发修改异常).来阻止多线程对列表的不正确修改。
+而fail-safe则是在多线程环境下修改列表结构时创建一个临时对象，在临时对象内修改。这样可以保证多线程下的安全，但是问题是会带来大量的临时列表元素的拷贝，带来额外开销。
