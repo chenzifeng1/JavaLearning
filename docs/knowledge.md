@@ -185,9 +185,6 @@ public class ArrayToList{
     public static void main(String args[]){
     Array array = new Array({1,2,3});
     ArrayList arys = new ArrayList<>(array.asList());   //利用ArrayList的构造方法来实现
-    
-    
-    
     }
 }
 ```
@@ -195,3 +192,6 @@ public class ArrayToList{
 ## fail-fast与fail-safe机制
 两者都是为了应对列表并发修改出错引入的模式。fail-fast在多线程修改列表结构时会抛出ConcurrentModificationException(并发修改异常).来阻止多线程对列表的不正确修改。
 而fail-safe则是在多线程环境下修改列表结构时创建一个临时对象，在临时对象内修改。这样可以保证多线程下的安全，但是问题是会带来大量的临时列表元素的拷贝，带来额外开销。
+
+
+## 2
