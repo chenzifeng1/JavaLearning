@@ -6,4 +6,5 @@ package designModel.proxy.dynamicProxy;
 
 public interface Proxy {
 
+    public void proxyMethod();
 }
