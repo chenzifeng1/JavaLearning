@@ -51,7 +51,6 @@ public class LinkedListAnalysis<E> extends AbstractSequentialList<E>
 
     /**
      * 判断索引是否合法，索引必须在0-size之间
-     *
      * @param index
      * @return
      */
@@ -108,7 +107,6 @@ public class LinkedListAnalysis<E> extends AbstractSequentialList<E>
 
     /**
      * 让e作第一个元素加入队列
-     *
      * @param e
      */
     void linkFirst(E e) {
@@ -124,6 +122,24 @@ public class LinkedListAnalysis<E> extends AbstractSequentialList<E>
         modCount++;
 
     }
+    public E get(int index){
+        checkElementIndex(index);
+        return node(index).item;
+    }
+
+    Node<E> node(int index){
+        checkElementIndex(index);
+        Node<E> node = first;
+        for (int i =0;i<size;i++){
+
+            if (i == index){
+                 break; //移动引用，直至标准左边
+            }
+            node = node.next;
+        }
+        return node;
+    }
+
 
 
     @Override

@@ -23,3 +23,25 @@ java(解释型语言):
 分为年轻代和年老代 
 
 对象首次创建放在年轻代的Eden区，当对象达到一定年龄（经过N次GC）将对象放到年老代。
+
+
+### 对象在内存中的存储布局
+普通对象  T t = new T();  
+1.markword   
+2.类型指针   class pointer：指向对象的类   
+3.实例数据 instance data   
+4.对齐 padding
+
+### 对象头包括什么 markword包括什么
+三方面信息：  可以通过jol Java object layout查看
+1.锁信息  
+2.hashCode()  
+3.GC信息 分代  
+
+### 对象怎么分配
+![对象分配过程](../picture/对象分配.PNG)
+ 1. 首先在可以往栈上分配先往栈上分配 ：对象小且简单 对标C的struct
+ 2. 如果对象体量较大，分配到堆上的老年代l
+ 3. 否则通过TLAB （threa local alocation buffer）分配到年轻代的Eden区
+ 
+ #### Object o = new Object()在内存中 占多少字节 16

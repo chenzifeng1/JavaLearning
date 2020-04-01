@@ -18,6 +18,9 @@ public class Singleton {
 
     /**
      * volatile是一个轻量的同步机制，相比synchronized提供的同步机制，valitile不会引起线程上下文的切换和调度，但同步性较差
+     * 作用：
+     * 1. 线程间可见： 不同线程读取volatile属性的最新值，而非缓存。
+     * 2.禁止指令重排序
      */
     public volatile static Singleton uniqueInstance;
 
@@ -29,7 +32,8 @@ public class Singleton {
         if(uniqueInstance == null){
 
             synchronized (Singleton.class){
-                uniqueInstance = new Singleton();
+                if(uniqueInstance == null)
+                    uniqueInstance = new Singleton();
             }
 
         }

@@ -18,3 +18,6 @@ Remember Set
 CMS Increamention Update 依然可能产生漏标
 G1: SATB Snapshot At the Begining  
 ZGC: the zero Garbage Collector
+
+CMS:回收6次之后进入老年代
+其他：回收15次进入老年代

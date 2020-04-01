@@ -9,6 +9,8 @@ public class ThreadTest {
 
     public static void main( String args[]){
 
+
+
         ThreadMXBean threadMXBean = ManagementFactory.getThreadMXBean();
 
         ThreadInfo[] threadInfos = threadMXBean.dumpAllThreads(false, false);
