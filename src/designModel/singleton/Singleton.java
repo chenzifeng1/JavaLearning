@@ -28,10 +28,11 @@ public class Singleton {
     }
 
     public static Singleton getUniqueInstance(){
-        //先判断是否
+        //第一次判断是否为空，如果为空进入加锁代码段
         if(uniqueInstance == null){
 
             synchronized (Singleton.class){
+                //在同步代码段再次判断，以防止有其他线程代码在之前已经通过第一次判断
                 if(uniqueInstance == null)
                     uniqueInstance = new Singleton();
             }
