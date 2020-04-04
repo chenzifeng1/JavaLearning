@@ -26,8 +26,9 @@ public class ThreadLocalDemo implements Runnable{
         }catch (InterruptedException e){
             e.printStackTrace();
         }
-
+        // 此处改变formatter的值，而formatter是类的静态变量，理论上唯一
+        // 但是输出结果看出，即使有线程改变了该变量，但是其他线程访问的时候依然读取的是原来的值。
         formatter.set(new SimpleDateFormat());
-        System.out.println("Thread Name= "+Thread.currentThread().getName()+" formatter = "+formatter.get().toPattern());
+        System.out.println("Thread new Name= "+Thread.currentThread().getName()+" formatter = "+formatter.get().toPattern());
     }
 }
