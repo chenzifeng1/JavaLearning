@@ -7,6 +7,13 @@ public class ThreadLocalDemo implements Runnable{
 
     private static final ThreadLocal<SimpleDateFormat> formatter = ThreadLocal.withInitial( () ->new SimpleDateFormat("yyyy-MM-dd HH:mm"));
 
+    public ThreadLocalDemo(int capacity) {
+
+    }
+
+    public ThreadLocalDemo() {
+    }
+
     public static void main(String args[])throws InterruptedException{
         ThreadLocalDemo obj = new ThreadLocalDemo();
         for(int i =0;i <10 ;i++){
