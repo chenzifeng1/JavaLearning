@@ -194,4 +194,28 @@ public class ArrayToList{
 而fail-safe则是在多线程环境下修改列表结构时创建一个临时对象，在临时对象内修改。这样可以保证多线程下的安全，但是问题是会带来大量的临时列表元素的拷贝，带来额外开销。
 
 
-## 2
+## synchronized与volatile
+两者都是用来保证线程安全的。两者的区别如下：
+1. 锁的量级：volatile是轻量级锁，而synchronized属于重量级锁。这个导致了使用两者会带来不同的性能。
+2. 作用领域：volatile只可以作用于变量字段，而synchronized不仅可以作用于变量字段，还可以作用于方法或代码段。
+3. 作用：volatile有两个作用，一个是线程间可见，另一个是防止指令重排序。而synchronized的作用是限定代码模块同步，即给对应的指令加锁，使一次只能有一个线程访问。  
+通常使用synchronized更加频繁，两者都使用的情况可以见DCL(double check lock，双重校验锁)，我们用双重校验锁来实现一个单例模式。具体代码见[双重校验锁实现单例](https://github.com/chenzifeng1/JavaLearning/blob/master/src/designModel/singleton/Singleton.java)  
+
+### 深度解析synchronized
+我们以单例模式为例，在对应的.java文件目录下，使用命令```javac Singleton.java```对Singleton该类进行编译，得到Singleton.class的java字节码文件。
+然后使用命令```javap -c Singleton```对该字节码文件进行反汇编。得到该类的汇编代码。  
+![synchronized代码块的汇编代码](../picture/synchronized字节码.PNG)  
+可以看到被monitorenter与monitorexit包裹的部分就是synchronized锁住的同步代码段。如果使用synchronized来修饰方法，汇编代码效果如下：  
+我们对一个synchronized方法进行编译，和反汇编。注意反汇编使用命令```javap -c -s -v -l Singleton```得到
+```java
+public class SynchronizedTest {
+
+    public synchronized void synWay(){
+        System.out.println(Thread.currentThread().getName());
+    }
+
+}
+
+```
+![synchronized方法的汇编代码](../picture/synchronized方法字节码.PNG)
+可以看到该方法通过ACC_SYNCHRONIZED来标识该方法为一个同步方法。
