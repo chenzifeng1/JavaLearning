@@ -215,7 +215,7 @@ public class SynchronizedTest {
     }
 
 }
-
 ```
 ![synchronized方法的汇编代码](../picture/synchronized方法字节码.PNG)
 可以看到该方法通过ACC_SYNCHRONIZED来标识该方法为一个同步方法。
+
