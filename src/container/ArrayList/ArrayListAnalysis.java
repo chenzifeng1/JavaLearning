@@ -8,7 +8,7 @@ import java.util.*;
  * List接口在Collection的基础上增加了大量方法，使其可以在list中间增加和删除元素
  * 两种基本类型的list
  * 1.ArrayList: 长于随机访问元素
- * ArrayList 继承自AbstractList类，实现了List<E>, RandomAccess, Cloneable, java.io.Serializable方法
+ * ArrayList 继承自AbstractList类，实现了List<E>, RandomAccess, Cloneable, java.md.io.Serializable方法
  * 默认容量为10
  * 2.LinkedList:通过较低代价在List中间增加和删除元素，并且提供了优化的顺序访问
  * <p>

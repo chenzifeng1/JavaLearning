@@ -1,7 +1,7 @@
 package knowledge;
 
 /**
- * java 反射机制：
+ * java.md 反射机制：
  */
 
 public class Reflection {
