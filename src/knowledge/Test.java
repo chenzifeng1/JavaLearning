@@ -14,8 +14,11 @@ public class Test {
 //        Scanner input = new Scanner(System.in);
 //        String str = input.nextLine();
         try {
-            reflectionTest();
-        }catch (Exception e){
+            TestInterface_2.getMyStr();
+            AbstractImpl a = new AbstractImpl();
+            a.setMyStr("new_myStr");
+            TestInterface_2.getMyStr();
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
@@ -73,24 +76,22 @@ public class Test {
         Reflection reflection = (Reflection) targetClass.newInstance();
 
         Method[] methods = targetClass.getDeclaredMethods();
-        for (Method method : methods){
+        for (Method method : methods) {
             System.out.println(method.toString());
             System.out.println(method.getName());
         }
 
 
         System.out.println("*******************************");
-        Method publicMethod = targetClass.getDeclaredMethod("testMethod",String.class);
-        publicMethod.invoke(reflection,"chenzifeng");
-
-
+        Method publicMethod = targetClass.getDeclaredMethod("testMethod", String.class);
+        publicMethod.invoke(reflection, "chenzifeng");
 
 
         Field strField = targetClass.getDeclaredField("str");
         //为了对类中的参数进行修改，取消安全检查
         strField.setAccessible(true);
         //修改
-        strField.set(reflection,"czf");
+        strField.set(reflection, "czf");
 
         String strValue = null;
         strField.get(strValue);
@@ -100,8 +101,6 @@ public class Test {
         privateMethod.setAccessible(true);
         privateMethod.invoke(reflection);
         System.out.println("success");
-
-
 
 
     }

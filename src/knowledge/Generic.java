@@ -9,7 +9,7 @@ package knowledge;
  * @param <Type>
  * @author chenzifneg1
  */
-public class Generic<Type> {
+public class Generic<Type>  implements General{
     private Type value;
     public Generic() {
     }
@@ -31,5 +31,20 @@ public class Generic<Type> {
             IllegalAccessException{
         T instance = tClass.cast(tClass);
         return instance;
+    }
+
+    @Override
+    public Object getValue() {
+        return a;
+    }
+
+    @Override
+    public String getTestName() {
+        return null;
+    }
+
+    @Override
+    public void print() {
+
     }
 }

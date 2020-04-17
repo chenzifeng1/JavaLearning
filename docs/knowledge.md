@@ -5,8 +5,28 @@ String使用final来修饰字符数组来保存字符串，所以String对象不
 class String{
     @Stable
      private final byte[] value;
+    public static void main(String args[]){
+        String str1 = "hello";
+        String str2 = ",";
+        Stirng str3 = "world";
+        String str = "hello,world";
+        System.out.println(str == "hello"+","+"world");
+        System.out.println(str == str1+str2+str3);
+    }
 }
 ```
+输出结果：  
+    true  
+    false  
+```String str ="hello"+"world" ;``` 该赋值语句一共产生了1个对象。
+虽然java中将字符串常量赋值给字符串对象，常量会存在字符串缓冲池中，而对象保留的是指向该缓冲池的引用。
+但是，编译器会在编译阶段完成字符串的拼接，即将```"hello"+"world"```在编译阶段拼接成一个字符串```helloworld```，
+然后将该字符串存入字符串缓冲池中。但是如果字符串拼接对象是引用类型，在字符串的拼接是在运行时进行。  
+
+总结来说就是：字面量"+"拼接是在编译期间进行的，拼接后的字符串存放在字符串池中；而字符串引用的"+"拼接运算实在运行时进行的，新创建的字符串存放在堆中。
+
+
+
 > StringBuffer与StringBuilder类，两者都继承了AbstractStringBuilder类，区别是StringBuffer实现父类方法是加了synchronized关键字，对方法使用了同步锁，是线程安全的。
 
 对于三者使用的总结：
@@ -219,3 +239,4 @@ public class SynchronizedTest {
 ![synchronized方法的汇编代码](../picture/synchronized方法字节码.PNG)
 可以看到该方法通过ACC_SYNCHRONIZED来标识该方法为一个同步方法。
 
+### String

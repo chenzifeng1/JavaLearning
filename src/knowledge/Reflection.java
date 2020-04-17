@@ -47,6 +47,8 @@ public class Reflection {
         return this.getClass().toString();
     }
 
-
+    public static String  getName(){
+        return "Reflection";
+    }
     
 }

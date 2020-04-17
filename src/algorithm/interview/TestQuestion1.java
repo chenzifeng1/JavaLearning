@@ -1,6 +1,4 @@
-package interview;
-
-import org.w3c.dom.ls.LSOutput;
+package algorithm.interview;
 
 import java.util.*;
 
