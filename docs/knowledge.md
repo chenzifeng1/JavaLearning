@@ -239,4 +239,11 @@ public class SynchronizedTest {
 ![synchronized方法的汇编代码](../picture/synchronized方法字节码.PNG)
 可以看到该方法通过ACC_SYNCHRONIZED来标识该方法为一个同步方法。
 
-### String
+### java 值传递和引用传递
+
+值传递：复制一份副本，传递参数的值，参数在函数内部的改变不会引起外界变量的改变  
+引用传递：将对象的引用传递给函数，参数在函数内部的赋值操作，都是由引用找到对象的内存地址，
+    方法内部对对象的改变会引起外界变量的变化。
+
+### try catch finally 
+当 try 语句和 finally 语句中都有 return 语句时，在方法返回之前，finally 语句的内容将被执行，并且 finally 语句的返回值将会覆盖原始的返回值。

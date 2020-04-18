@@ -13,7 +13,7 @@ public class RandomArray {
 
     public RandomArray() {
         for (int i = 0; i < defaultBound; i++) {
-            randomArray.add(Math.abs(random.nextInt(defaultBound)));
+         //   randomArray.add(Math.abs(random.nextInt(defaultBound)));
         }
     }
 
