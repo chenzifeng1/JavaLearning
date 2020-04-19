@@ -40,14 +40,15 @@ public class MyHashMap<K, V> extends AbstractMap<K, V>
         this.loadFactor = DEFAULT_LOAD_FACTOR;
     }
 
-    public MyHashMap(int initialCapacity){
-        this(initialCapacity,DEFAULT_LOAD_FACTOR);
+    public MyHashMap(int initialCapacity) {
+        this(initialCapacity, DEFAULT_LOAD_FACTOR);
     }
 
     /**
      * 构造方法：判断初始化容量是否在合法范围，以及获取
+     *
      * @param initialCapacity 初始化容量
-     * @param loadFactor 装填因子
+     * @param loadFactor      装填因子
      */
 
     public MyHashMap(int initialCapacity, float loadFactor) {
@@ -143,13 +144,65 @@ public class MyHashMap<K, V> extends AbstractMap<K, V>
     /*--------------------protected way (保护类方法区）----------------------*/
 
     /**
-     *
      * @param map
      * @param exivt 如果map已经被初始化了，则为false，否则为true
      */
-    final void putMapEntries(Map<? extends K,? extends V> map,boolean exivt){
+    final void putMapEntries(Map<? extends K, ? extends V> map, boolean exivt) {
+        int s = map.size();
+        //查看map的元素个数，如果map内有元素则将元素填装到table中
+        if (s > 0) {
+            //判断table是否已经初始化
+            if (table == null) {
+                //ft可以认为是根据给定map所对应的容量值
+                float ft = ((float) s / loadFactor) + 1.0F;
+                //比较理论容量和最大容量小，选取适当的值作为table的容量
+                int t = (ft < (float) MAXIMUM_CAPACITY) ? (int) ft : MAXIMUM_CAPACITY;
+                //如果得到的t大于阈值，则初始化阈值，即给定map的
+                if (t > threshold)
+                    threshold = tableSizeFor(t);
+
+            } else if (s > threshold)  //如果table已经被初始化，且map的容量大于阈值，则进行扩容
+                resize();
+        }
+
+    }
 
 
+    final Node<K, V>[] resize() {
+        //记录原来的table的信息：table长度，阈值
+        Node<K, V>[] oldTab = table;
+        int oldCap = (oldTab == null) ? 0 : oldTab.length;
+        int oldThr = threshold;
+        int newCap, newThr = 0;
+        if (oldCap > 0) {
+            //如果原有的table的容量已达到最大值，说明无法继续扩容
+            if (oldCap >= MAXIMUM_CAPACITY) {
+                threshold = Integer.MAX_VALUE;
+                return oldTab;
+            }
+            //如果让新容量为旧容量的两倍并且还小于最大容量，且旧容量大于等于默认初试容量
+            else if ((newCap = oldCap << 1) < MAXIMUM_CAPACITY &&
+                    oldCap >= DEFAULT_INITIAL_CAPACITY) {
+                //则新的阈值为旧阈值的两倍
+                newThr = oldThr << 1;
+            }
+        } else if (oldThr > 0)
+            //如果需要扩容，说明容器的容量到达了阈值：一般规定，容器容量达到阈值，进行扩容。
+            newCap = oldThr;
+            //
+        else {
+            newCap = DEFAULT_INITIAL_CAPACITY;
+            newThr = (int) (DEFAULT_LOAD_FACTOR * DEFAULT_INITIAL_CAPACITY);
+        }
+        if (newThr == 0) {
+            float ft = (float) newCap * loadFactor;
+            newThr = (newCap < MAXIMUM_CAPACITY && ft < (float) MAXIMUM_CAPACITY ?
+                    (int) ft : Integer.MAX_VALUE);
+        }
+
+
+
+        return null;
     }
     /*------------------- static utilities (静态方法区)----------------------*/
 
@@ -171,7 +224,6 @@ public class MyHashMap<K, V> extends AbstractMap<K, V>
     }
 
     /**
-     *
      * @param cap
      * @return
      */
