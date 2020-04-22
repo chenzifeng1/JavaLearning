@@ -64,12 +64,12 @@ public class MyHashMap<K, V> extends AbstractMap<K, V>
 
     /**
      * 内部节点类Node,JDK1.8之后，会将在解决冲突时，将长度超过8的链表转化为红黑树
-     *
+     * 如果内部成语变量中有被final修饰的且不想给它初始化，可以只写包含形参的构造方法，即不写空构造方法
      * @param <K>
      * @param <V>
      */
     static class Node<K, V> implements Map.Entry<K, V> {
-        final int hash;
+        final int hash ;
         final K key;
         V value;
         Node<K, V> next;
@@ -80,6 +80,8 @@ public class MyHashMap<K, V> extends AbstractMap<K, V>
             this.value = value;
             this.next = next;
         }
+
+
 
         /**
          * final方法不能被子类重写
@@ -145,9 +147,9 @@ public class MyHashMap<K, V> extends AbstractMap<K, V>
 
     /**
      * @param map
-     * @param exivt 如果map已经被初始化了，则为false，否则为true
+     * @param evict 如果map已经被初始化了，则为false，否则为true
      */
-    final void putMapEntries(Map<? extends K, ? extends V> map, boolean exivt) {
+    final void putMapEntries(Map<? extends K, ? extends V> map, boolean evict) {
         int s = map.size();
         //查看map的元素个数，如果map内有元素则将元素填装到table中
         if (s > 0) {
@@ -165,8 +167,36 @@ public class MyHashMap<K, V> extends AbstractMap<K, V>
                 resize();
         }
 
+
+        for (Map.Entry<? extends K, ? extends V> e : map.entrySet()) {
+            K key = e.getKey();
+            V value = e.getValue();
+            putVal(hash(key), key, value, false, evict);
+        }
     }
 
+    /**
+     * 实现Map.put和相关的方法
+     * @param hash key的hash值
+     * @param key  key
+     * @param value value
+     * @param onlyIfAbsent 如果是true,不能改变已存在的变量
+     * @param evict 如果是false,则table处于创建模式
+     * @return
+     */
+    final V putVal(int hash,K key,V value,boolean onlyIfAbsent,boolean evict){
+        Node<K,V>[] tab;
+        Node<K,V> p;
+        int n;
+        int i;
+        //如果当前实例的table为null,或table里面没有元素
+        if((tab = this.table)==null||(n = tab.length)==0)
+        //当前实例进行resize(),使tab为扩容后数组的第一个节点
+            n = (tab = resize()).length;
+
+
+        return  null;
+    }
 
     final Node<K, V>[] resize() {
         //记录原来的table的信息：table长度，阈值
@@ -194,12 +224,17 @@ public class MyHashMap<K, V> extends AbstractMap<K, V>
             newCap = DEFAULT_INITIAL_CAPACITY;
             newThr = (int) (DEFAULT_LOAD_FACTOR * DEFAULT_INITIAL_CAPACITY);
         }
+        // 如果此时新的阈值还是0，那么将新阈值设为（容量*装填因子）的值或者是最大值；
         if (newThr == 0) {
             float ft = (float) newCap * loadFactor;
             newThr = (newCap < MAXIMUM_CAPACITY && ft < (float) MAXIMUM_CAPACITY ?
                     (int) ft : Integer.MAX_VALUE);
         }
 
+        threshold = newThr;
+
+//        @SuppressWarnings({"rawtypes","unchecked"})
+//        Node<K,V>[] newTab = (Node<K, V>[]) new Node<K,V>[newCap];
 
 
         return null;
