@@ -33,6 +33,7 @@ java(解释型语言):
 4.对齐 padding
 
 ### 对象头包括什么 markword包括什么
+对象头包括 markword和类型指针
 三方面信息：  可以通过jol Java object layout查看
 1.锁信息  
 2.hashCode()  
@@ -53,3 +54,4 @@ java(解释型语言):
 解析和初始化过。如果没有必须先执行相应的[类加载过程](https://blog.csdn.net/zhangliangzi/article/details/51319033)。
 2. 分配内存：在类加载检查完成后，为新生对象分配内存，对象所需的内存大小在类加载完成之后便可以确定，为对象分配空间的任务等于把一块
 确定大小的内存从堆空间划分出来。
+3. 

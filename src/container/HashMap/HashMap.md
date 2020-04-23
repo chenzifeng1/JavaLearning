@@ -62,3 +62,22 @@ HashMap将key的hashCode经过扰动函数处理得到对应的hash值，然后�
 ## 内部类
 内部类有两个，一个是节点类Node，作为元素的基本存储节点；另一个是树节点TreeNode,链表转红黑树时使用的节点。
 具体代码解析见[HashMap源码分析](https://github.com/chenzifeng1/JavaLearning/blob/master/src/container/HashMap/MyHashMap.java)
+
+## Map的几个实现
+![map的常见实现](../../../picture/map的几个实现.PNG)
+
+Map作为一个接口，有几个实现类需要注意一下：
+HashMap：最常见的Map的实现，以键值对为单位存储，存储过程:首先获取键值对中的key的hashcode，使用扰动函数hash来得到对应的hash，
+根据一定的算法来得到该元素在table上的存放位置，如果该位置没有元素，则将元素加到table的该位置上。如果table上的该位置有元素，
+则判断两个元素的hash和key是否一样，如果一样则覆盖，不一样则链到已有元素的后面。所以HashMap要求不能有一样的key，
+但是针对不同的key可以有相同的value。另外如果随着元素在某个位置上的链表长度越来越长，在jdk1.8之后，某个链表长度超过8，
+则会将链表转换为红黑树。注意的是，最好一开始根据自己的需求设置尽量合理的table长度，因为一旦改变table长度，就要面临rehash（重哈希），所有元素会重新分配，时间成本较高。
+HashMap是线程不安全的，在多线程的环境下可能造成数据不一致的情况。可以使用ConcurrentHashMap这个线程安全的类。  
+
+HashTable:现在使用并不是特别多。HashMap允许最多一个key为null，允许多个value是null。HashTable不允许任何一个key或value为null。
+另外HashTable每次只能允许一个线程对其访问，所以是线程安全的Map。  
+
+LinkedHashMap: HashMap的一个子类，保存了插入顺序，使用Iterator(迭代器)去遍历LinkedHashMap时，先遍历的是先插入的元素。
+一般情况下，LinkedHashMap的遍历速度比HashMap要慢很多：HashTable是按顺序逐个遍历，遍历速度取决于元素的个数。
+
+TreeMap：实现了SortMap能够把它保存到元素按键排序，默认按照升序的方式存储，可以自定义比较器。读取元素时，得到的元素是排好序的。

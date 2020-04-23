@@ -13,15 +13,27 @@ public class Test {
     public static void main(String args[]) {
 //        Scanner input = new Scanner(System.in);
 //        String str = input.nextLine();
+
+
         try {
-            TestInterface_2.getMyStr();
-            AbstractImpl a = new AbstractImpl();
-            a.setMyStr("new_myStr");
-            TestInterface_2.getMyStr();
+            Reflection reflection = new Reflection(5,"czf");
+            Reflection reflection1 = valueOfPara(reflection);
+            System.out.println(reflection == reflection1);
+           // System.out.println(reflection1.getNum()+":"+reflection1.getStr());
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
+
+    public static Reflection valueOfPara(Reflection reflection){
+        reflection.setNum(7);
+        reflection.setStr("cyb");
+        return reflection;
+    }
+
+
+    public static void reflectionTest1(){}
+
 
     public static void equalsTest() {
         String a = "ab";
@@ -74,6 +86,7 @@ public class Test {
             NoSuchFieldException {
         Class<?> targetClass = Class.forName("knowledge.Reflection");
         Reflection reflection = (Reflection) targetClass.newInstance();
+
 
         Method[] methods = targetClass.getDeclaredMethods();
         for (Method method : methods) {

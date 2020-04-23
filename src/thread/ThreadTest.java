@@ -15,10 +15,15 @@ public class ThreadTest implements Runnable {
     public static void main( String args[]){
 
         ThreadTest obj = new ThreadTest();
+//
+//        for(int i =0 ;i<10;i++){
+//            Thread thread = new Thread(obj,"thread"+i);
+//            thread.start();
+//        }
 
-        for(int i =0 ;i<10;i++){
-            Thread thread = new Thread(obj,"thread"+i);
-            thread.start();
+
+        synchronized (ThreadTest.class){
+            resource++;
         }
 
 
@@ -32,9 +37,9 @@ public class ThreadTest implements Runnable {
         reentrantLock.lock();//对以下代码进行加锁
         try{
              resource++; //对共享资源进行操作
-            
             System.out.println(resource);
             Thread.sleep(100);
+
         }catch (InterruptedException e){
             System.out.println(e.getMessage());
         }finally {

@@ -16,6 +16,17 @@ package knowledge;
 
 public class AbstractImpl extends AbstractClass {
 
+
+    public static void main(String args[]){
+
+        AbstractImpl a = new AbstractImpl(1,5);
+    }
+
+    public AbstractImpl(int pub, int pri) {
+        super(pub, pri);
+        System.out.println(pub+pri);
+    }
+
     @Override
     public Object getValue() {
         return 1;

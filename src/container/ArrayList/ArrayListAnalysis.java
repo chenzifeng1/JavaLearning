@@ -2,6 +2,7 @@ package container.ArrayList;
 
 import jdk.internal.util.ArraysSupport;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 /**
@@ -20,6 +21,8 @@ public class ArrayListAnalysis<E> extends AbstractList<E> implements List<E>, Ra
     /**
      * 默认初始化容量，若初始化时不指定ArrayList的容量，在默认为10。
      */
+
+    Array array;
     private static final int DEFAULT_CAPACITY = 10;
 
     private static final Object[] EMPTY_ELEMENTDATA = {};

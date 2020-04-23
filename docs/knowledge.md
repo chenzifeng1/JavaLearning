@@ -239,6 +239,18 @@ public class SynchronizedTest {
 ![synchronized方法的汇编代码](../picture/synchronized方法字节码.PNG)
 可以看到该方法通过ACC_SYNCHRONIZED来标识该方法为一个同步方法。
 
+### synchronized和lock的区别：
+synchronized是java中的关键字，用来对方法或者是代码段进行加锁，保证同一时刻只能有一个线程来访问该段代码。lock是java中的一个接口，实现lock的接口可以在代码层面对资源进行加锁，如ReentrantLock。
+
+Synchronized在发生异常时会主动释放线程占有的锁，因此不会导致死锁现象。而lock在发生异常时，如果没有使用unlock主动释放锁，很有可能造成死锁现象。
+故使用lock时，需要在finally模块进行unlcok。
+
+Lock可以让等待锁的线程相应中断，而synchronized不行，使用synchronized会使等待锁的线程一直等待下去。
+
+Lock可以获取线程释放成功获取到锁，而synchronized不行
+
+
+
 ### java 值传递和引用传递
 
 值传递：复制一份副本，传递参数的值，参数在函数内部的改变不会引起外界变量的改变  
@@ -247,3 +259,4 @@ public class SynchronizedTest {
 
 ### try catch finally 
 当 try 语句和 finally 语句中都有 return 语句时，在方法返回之前，finally 语句的内容将被执行，并且 finally 语句的返回值将会覆盖原始的返回值。
+
