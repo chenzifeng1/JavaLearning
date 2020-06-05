@@ -61,7 +61,19 @@ redis的文件事件处理器包括四个部分:
 4. zset(sort set)
 5. list
 
+
+String :
+1. 字符串
+2. 数值
+3. bitmap
 应用类型：
 ###key-value
  
-  
+ 
+## redis命令
+1. 启动redis服务  
+    首先找到redis安装路径，进入包内，打开cmd，输入```redis-server.exe redis.windows.conf``` 。此时保持该窗口运行，打开另一个cmd。
+2. redis客户端  
+    我们可以通过redis自己封装的客户端连接到redis服务，而不需要自己手动```nc ip:port```。启用redis客户端的命令：```redis-cli```
+3. help命令  
+    
