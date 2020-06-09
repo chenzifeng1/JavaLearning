@@ -5,7 +5,7 @@
 3. 有序性
 
 ### 线程安全的容器
-Vector, HashTable
+Vector, HashTable,CopyOnWriteArrayList,
 
 
 
