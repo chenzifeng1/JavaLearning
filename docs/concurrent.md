@@ -45,3 +45,6 @@ tryReleaseShared(int)//共享方式。尝试释放资源，成功则返回true�
 ### ReentrantLock
 可重入锁:一个线程获得了锁之后仍然可以反复的加锁，不会出现自己阻塞自己的情况。  
 ReentrantLock默认是非公平锁，因为非公平锁的效率比公平锁搞。
+
+### ThreadLocal
+ThreadLocal中存在一个内部静态类ThreadLocalMap，

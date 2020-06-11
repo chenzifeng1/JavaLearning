@@ -289,9 +289,13 @@ public class ArrayListAnalysis<E> extends AbstractList<E> implements List<E>, Ra
                         break found;
                 }
             } else {
-                for (i = 0; i < s; i++)
-                    if (o.equals(obs[i]))
+                for (i = 0; i < s; i++) {
+                    if (o.equals(obs[i])) {
                         break found;
+                    }
+
+                }
+
             }
             return false;
         }
@@ -366,7 +370,7 @@ public class ArrayListAnalysis<E> extends AbstractList<E> implements List<E>, Ra
     @Override
     public E remove(int index) {
         modCount++;
-        fastRemove(this.elementData,index);
+        fastRemove(this.elementData, index);
         return null;
     }
 

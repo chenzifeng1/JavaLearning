@@ -1,4 +1,4 @@
-package thread;
+package threadPool.thread;
 
 import java.text.SimpleDateFormat;
 import java.util.Random;

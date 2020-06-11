@@ -1,11 +1,5 @@
-package thread;
+package threadPool.thread;
 
-import java.lang.management.ManagementFactory;
-import java.lang.management.ThreadInfo;
-import java.lang.management.ThreadMXBean;
-import java.util.TreeMap;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class ThreadTest implements Runnable {
@@ -17,8 +11,8 @@ public class ThreadTest implements Runnable {
         ThreadTest obj = new ThreadTest();
 //
 //        for(int i =0 ;i<10;i++){
-//            Thread thread = new Thread(obj,"thread"+i);
-//            thread.start();
+//            Thread threadPool.thread = new Thread(obj,"threadPool.thread"+i);
+//            threadPool.thread.start();
 //        }
 
 
@@ -32,7 +26,7 @@ public class ThreadTest implements Runnable {
 
     @Override
     public void run() {
-        System.out.println("thread:"+Thread.currentThread().getName() );
+        System.out.println("threadPool.thread:"+Thread.currentThread().getName() );
         ReentrantLock reentrantLock = new ReentrantLock();//
         reentrantLock.lock();//对以下代码进行加锁
         try{
