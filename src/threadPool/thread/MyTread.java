@@ -1,17 +1,13 @@
 package threadPool.thread;
 
-import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.Callable;
 
-public class MyTread implements Runnable{
+public class MyTread implements Callable{
     private Thread thread;
 
 
-    /**
-     * ReentrantLock 可重入锁
-     */
-    private ReentrantLock reentrantLock;
     @Override
-    public void run() {
-        System.out.println(Thread.currentThread().getName());
+    public Object call() throws Exception {
+        return null;
     }
 }
