@@ -34,6 +34,6 @@ import java.util.*;
 public class TestQuestion1 {
     Scanner sc = new Scanner(System.in);
 //    System.out.println();
-    Collection<Integer> integerCollection = new ArrayList<>(Arrays.asList(1,2,3,4,5,6));
+    Collection<Integer> integerCollection = new ArrayList(Arrays.asList(1,2,3,4,5,6));
 
 }

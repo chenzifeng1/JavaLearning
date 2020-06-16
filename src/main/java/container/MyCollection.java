@@ -1,5 +1,6 @@
 package container;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -10,7 +11,7 @@ public class MyCollection<E> implements Collection {
      */
     private final static int DEFAULT_CAPACITY = 10;
 
-
+    private ArrayList arrayList;
 
     @Override
     public int size() {

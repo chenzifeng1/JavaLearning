@@ -1,6 +1,6 @@
 package container.ArrayList;
 
-import jdk.internal.util.ArraysSupport;
+
 
 import java.lang.reflect.Array;
 import java.util.*;
@@ -140,9 +140,10 @@ public class ArrayListAnalysis<E> extends AbstractList<E> implements List<E>, Ra
 
         int oldCapacity = elementData.length;   //记录原有数组大小
         if (oldCapacity > 0 || elementData != DEFAULTCAPACITY_EMPTY_ELEMENTDATA) {  //若原数组不为空
-            int newCapacity = ArraysSupport.newLength(oldCapacity,
-                    minCapacity - oldCapacity, /* minimum growth */
-                    oldCapacity >> 1           /* preferred growth */);     //获取新的数组容量
+//            int newCapacity = ArraysSupport.newLength(oldCapacity,
+//                    minCapacity - oldCapacity, /* minimum growth */
+//                    oldCapacity >> 1           /* preferred growth */);     //获取新的数组容量
+            int newCapacity = oldCapacity << 1;
             return elementData = Arrays.copyOf(elementData, newCapacity);   //原数组拷贝扩容
         } else {
             return elementData = new Object[Math.max(DEFAULT_CAPACITY, minCapacity)];

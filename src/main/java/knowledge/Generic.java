@@ -43,8 +43,4 @@ public class Generic<Type>  implements General{
         return null;
     }
 
-    @Override
-    public void print() {
-
-    }
 }
