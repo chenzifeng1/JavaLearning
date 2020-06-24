@@ -51,7 +51,6 @@ public class App {
 
             }catch (InterruptedException e){
                 //此处抛出异常，是因为强制销毁线程
-
                 System.out.println(Thread.currentThread().getId()+" sleep interruptedException "
                 +Thread.currentThread().isInterrupted());
             }

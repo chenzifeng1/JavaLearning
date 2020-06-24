@@ -137,11 +137,13 @@ public class SnowflakeIdWorker {
 
 
     public static void main(String[] args) throws InterruptedException {
-        SnowflakeIdWorker idWorker = new SnowflakeIdWorker(0, 0);
-        for (int i = 0; i < 10; i++) {
-            long id = idWorker.nextId();
-            Thread.sleep(1);
-            System.out.println(id);
-        }
+//        SnowflakeIdWorker idWorker = new SnowflakeIdWorker(0, 0);
+//        for (int i = 0; i < 10; i++) {
+//            long id = idWorker.nextId();
+//            Thread.sleep(1);
+//            System.out.println(id);
+//        }
+        String s ="\"dsad\"dasd";
+        System.out.println(s.replaceAll("\\\\",""));
     }
 }
