@@ -17,7 +17,7 @@ public class RPCServiceImpl extends UnicastRemoteObject implements RPCService {
 
     protected RPCServiceImpl() throws RemoteException {
     }
-    @Override
+
     public String getMessage(String no) throws RemoteException {
         return ipAddress+":"+no;
     }

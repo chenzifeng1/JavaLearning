@@ -25,9 +25,11 @@ public class CustomerSocketFactory extends RMISocketFactory{
 
     @Override
     public ServerSocket createServerSocket(int port) throws IOException {
+        //指定端口
         if (port ==0){
             port = 8855;
         }
-        return null;
+        logger.info("指定端口："+port);
+        return new ServerSocket(port);
     }
 }
