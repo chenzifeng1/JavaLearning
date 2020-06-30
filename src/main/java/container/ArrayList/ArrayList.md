@@ -26,3 +26,4 @@ public class ArrayList<E> extends AbstractList<E>
 - modCount:在ArrayList的所有涉及结构变化的方法中都增加modCount的值，包括：add()、remove()、addAll()、removeRange()及clear()方法。
 ### 核心方法介绍
 [ArrayList源码分析](https://github.com/chenzifeng1/JavaLearning/blob/master/src/container/ArrayList/MyArrayList.java)
+
