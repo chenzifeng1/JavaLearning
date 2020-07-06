@@ -1,8 +1,6 @@
-package RPC;
+package RPC.RMI;
 
 import java.rmi.RemoteException;
-import java.rmi.server.RMIClientSocketFactory;
-import java.rmi.server.RMIServerSocketFactory;
 import java.rmi.server.UnicastRemoteObject;
 
 /**
@@ -18,6 +16,7 @@ public class RPCServiceImpl extends UnicastRemoteObject implements RPCService {
     protected RPCServiceImpl() throws RemoteException {
     }
 
+    @Override
     public String getMessage(String no) throws RemoteException {
         return ipAddress+":"+no;
     }

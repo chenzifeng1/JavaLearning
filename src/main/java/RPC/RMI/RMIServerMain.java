@@ -1,7 +1,5 @@
-package RPC;
+package RPC.RMI;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.rmi.AlreadyBoundException;
@@ -18,7 +16,7 @@ import java.rmi.server.RMISocketFactory;
  **/
 
 public class RMIServerMain {
-    private final static Logger log = LoggerFactory.getLogger(RMIServerMain.class);
+
     //注册服务
     public static void main(String[] args) {
         try {
@@ -28,9 +26,9 @@ public class RMIServerMain {
             RMISocketFactory.setSocketFactory(new CustomerSocketFactory());
 
             RPCService rpcService = new RPCServiceImpl();
-            Naming.bind("rmi://localhost:8866/myService",rpcService);
+            Naming.bind("rmi://localhost:8866/RPCService",rpcService);
 
-            log.info("rmi 服务启动");
+            System.out.println("服务已启动");
         } catch (RemoteException e) {
             e.printStackTrace();
         } catch (IOException e) {
