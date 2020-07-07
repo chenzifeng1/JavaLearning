@@ -54,6 +54,12 @@
         <artifactId>slf4j-api</artifactId>
         <version>1.7.30</version>
     </dependency>
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-beans -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+            <version>5.2.1.RELEASE</version>
+        </dependency>
 
 
     </dependencies>

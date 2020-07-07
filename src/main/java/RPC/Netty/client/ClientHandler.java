@@ -1,4 +1,4 @@
-package RPC.Netty.Client;
+package RPC.Netty.client;
 
 import RPC.Netty.protocol.RPCRequest;
 import RPC.Netty.protocol.RPCResponse;
