@@ -18,7 +18,7 @@ public class RPCRequest {
      */
     private String requestId;
     /**
-     * 请求对象名
+     * 请求对象的类名
      */
     private String className;
     /**
@@ -28,7 +28,7 @@ public class RPCRequest {
     /**
      * 参数类型
      */
-    private Class<?> parameterType;
+    private Class<?>[] parameterType;
     /**
      * 参数
      */
