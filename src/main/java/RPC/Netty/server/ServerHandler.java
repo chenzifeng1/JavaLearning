@@ -30,16 +30,18 @@ public class ServerHandler extends SimpleChannelInboundHandler<RPCRequest> imple
         RPCResponse rpcResponse = new RPCResponse();
         rpcRequest.setRequestId(rpcRequest.getRequestId());
         try {
+            //handler是服务端通过反射根据RPCRequest对象中的信息调用响应的方法。
             Object handler = handler(rpcRequest);
-        }catch (Exception e){
-
+            log.info("返回结果：{}",handler);
+            rpcResponse.setResult(handler);
+        }catch (Throwable throwable){
+            rpcResponse.setErrorInfo(throwable.getMessage());
+            throwable.printStackTrace();
         }
+        channelHandlerContext.writeAndFlush(rpcResponse);
     }
 
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
 
-    }
 
     /**
      * 服务端使用代理处理请求数据
@@ -64,6 +66,13 @@ public class ServerHandler extends SimpleChannelInboundHandler<RPCRequest> imple
         FastClass fastClass = FastClass.create(serverClass);
         FastMethod fastMethod = fastClass.getMethod(methodName,parametersTypes);
         log.info("开始调用CGLIB动态代理执行服务端方法...");
+        //调用方法
         return fastMethod.invoke(serverBean, parameters);
     }
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        this.applicationContext = applicationContext;
+    }
+
 }
