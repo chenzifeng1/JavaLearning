@@ -109,7 +109,7 @@ public class NettyClient {
 
     @PreDestroy
     public void close(){
-        //
+        //关闭通道，同步不可中断
         eventLoopGroup.shutdownGracefully();
         channel.closeFuture().syncUninterruptibly();
 
