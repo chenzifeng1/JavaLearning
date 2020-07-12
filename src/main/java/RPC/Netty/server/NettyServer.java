@@ -8,12 +8,15 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioChannelOption;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.annotation.PreDestroy;
 import javax.imageio.spi.ServiceRegistry;
 import java.util.ArrayList;
 
+@Slf4j
 public class NettyServer implements InitializingBean {
     /**
      * 负责处理客户端连接的线程池
@@ -22,7 +25,7 @@ public class NettyServer implements InitializingBean {
     /**
      * 负责处理读写操作的线程池
      */
-    private EventLoopGroup worker =null;
+    private EventLoopGroup worker = null;
     /**
      * 服务处理器
      */
@@ -33,13 +36,12 @@ public class NettyServer implements InitializingBean {
     public void afterPropertiesSet() throws Exception {
         //可以使用Eureka或者Zookeeper做注册中心，暂不处理
 //        ServiceRegistry registry  =new ZKServiceRegistry();\
-        ArrayList<Class<?> > categories = new ArrayList<>();
-
+        ArrayList<Class<?>> categories = new ArrayList<>();
         ServiceRegistry registry = new ServiceRegistry(categories.iterator());
         start(registry);
     }
 
-    public void start(ServiceRegistry registry) throws Exception{
+    public void start(ServiceRegistry registry) throws Exception {
         //建立负责客户端连接的线程池
         boss = new NioEventLoopGroup();
         //建立负责读写操作的线程池
@@ -55,20 +57,33 @@ public class NettyServer implements InitializingBean {
                 //设置编码器
                 channelPipeline.addLast(new RpcEncoder(RPCRequest.class, new SerializerImpl()));
                 //设置解码器
-                channelPipeline.addLast(new RpcDecoder(RPCResponse.class,new SerializerImpl()));
+                channelPipeline.addLast(new RpcDecoder(RPCResponse.class, new SerializerImpl()));
                 //设置处理器
                 channelPipeline.addLast(serverHandler);
             }
         });
-        bind(serverBootstrap,8888);
+        bind(serverBootstrap, 8888);
     }
 
     /**
-     * 
      * @param serverBootstrap
      * @param port
      */
-    public void bind(final ServerBootstrap serverBootstrap,int port){
+    public void bind(final ServerBootstrap serverBootstrap, int port) {
+        serverBootstrap.bind(port).addListener(future -> {
+            if (future.isSuccess()) {
+                log.info("端口绑定成功 {}", port);
+            } else {
+                log.error("端口绑定失败{}", port);
+                bind(serverBootstrap, port + 1);
+            }
+        });
+    }
 
+    @PreDestroy
+    public void destory() throws InterruptedException{
+        boss.shutdownGracefully().sync();
+        worker.shutdownGracefully().sync();
+        log.info("关闭Netty");
     }
 }
