@@ -14,9 +14,9 @@ public class Test {
 
     public static void main(String[] args) throws ParseException {
         //language=JSON
-        String time = "202007021136";
-        System.out.println(parseToSecond(time));
-
+//        String time = "202007021136";
+//        System.out.println(parseToSecond(time));
+        System.out.println(new String[6].length);
     }
 
 

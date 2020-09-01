@@ -25,7 +25,7 @@ public class DefaultFuture {
      */
     public RPCResponse getRpcResponse(int timeOut) {
         synchronized (object){
-            while(isSuccess){
+            while(!isSuccess){
                 try {
                     object.wait(timeOut);
                 } catch (InterruptedException e) {

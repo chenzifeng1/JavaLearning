@@ -33,7 +33,7 @@ public class ClientHandler extends ChannelDuplexHandler {
         if (msg instanceof RPCResponse){
             RPCResponse rpcResponse = (RPCResponse) msg;
             //Map已经维护好了对应的映射关系
-            DefaultFuture defaultFuture = futureMap.get(rpcResponse.getResponseId());
+            DefaultFuture defaultFuture = futureMap.get(rpcResponse.getRequestId());
             // 异步响应？
             defaultFuture.setRpcResponse(rpcResponse);
         }

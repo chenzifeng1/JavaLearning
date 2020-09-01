@@ -17,7 +17,7 @@ public class RPCResponse {
     /**
      * 响应id
      */
-    private String responseId;
+    private String requestId;
     /**
      * 错误信息
      */

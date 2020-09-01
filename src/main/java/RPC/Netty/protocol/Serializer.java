@@ -28,5 +28,4 @@ public interface Serializer {
      */
     <T> T deserialize(Class<T> clazz,byte[] bytes) throws IOException;
 
-
 }

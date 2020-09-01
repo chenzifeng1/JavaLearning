@@ -28,7 +28,7 @@ public class ServerHandler extends SimpleChannelInboundHandler<RPCRequest> imple
     @Override
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, RPCRequest rpcRequest) throws Exception {
         RPCResponse rpcResponse = new RPCResponse();
-        rpcRequest.setRequestId(rpcRequest.getRequestId());
+        rpcResponse.setRequestId(rpcRequest.getRequestId());
         try {
             //handler是服务端通过反射根据RPCRequest对象中的信息调用响应的方法。
             Object handler = handler(rpcRequest);

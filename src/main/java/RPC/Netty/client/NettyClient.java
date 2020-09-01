@@ -21,17 +21,30 @@ import java.util.concurrent.TimeUnit;
  **/
 @Slf4j
 public class NettyClient {
-    //
+    /**
+     * 事件处理器集合：每个I/O操作都交给EventLoop来处理，
+     * 而EventLoopGroup里面通常包括大于一个的EventLoop
+     */
     private EventLoopGroup eventLoopGroup;
-    //
+    /**
+     * 定义了与Socket进行交互的操作集
+     */
     private Channel channel;
-    //客户端处理器
+    /**
+     * 客户端处理器
+     */
     private ClientHandler clientHandler;
-    //ip地址
+    /**
+     * ip地址
+     */
     private String host;
-    //端口
+    /**
+     * 端口
+     */
     private Integer port;
-    //最大重试次数
+    /**
+     * 最大重试次数
+     */
     private static final int MAX_RETRY = 5;
 
     public NettyClient(String host, Integer port) {
@@ -74,6 +87,7 @@ public class NettyClient {
      * @param retry
      */
     private void connect(Bootstrap bootstrap, String host, int port, int retry) {
+        // ChannelFuture来获取响应结果
         ChannelFuture channelFuture = bootstrap.connect(host, port).addListener(future -> {
             if (future.isSuccess()) {
                 log.info("连接成功");
@@ -84,9 +98,9 @@ public class NettyClient {
                 int order = (MAX_RETRY - retry) + 1;
                 //本次重连间隔
                 int delay = 1 << order;
-                log.error("第 {} 次重连失败，时间：{}",order,new Date());
+                log.error("第 {} 次重连失败，时间：{}", order, new Date());
                 //定时任务
-                bootstrap.config().group().schedule( ()->connect(bootstrap,host,port,retry-1),delay, TimeUnit.SECONDS);
+                bootstrap.config().group().schedule(() -> connect(bootstrap, host, port, retry - 1), delay, TimeUnit.SECONDS);
             }
         });
         channel = channelFuture.channel();
@@ -95,23 +109,23 @@ public class NettyClient {
 
     /**
      * 发送数据：使用channel将请求发送之后进入等待状态，如果响应来了会被唤醒，唤醒时说明ClientHandler响应对象中已经有请求对应的响应了，使用请求Id获取该响应即可。
+     *
      * @param rpcRequest
      * @return
      */
-    public RPCResponse send(final RPCRequest rpcRequest){
-       try {
-           channel.writeAndFlush(rpcRequest).await();
-       }catch (InterruptedException e){
-           log.error("发送数据失败",e);
-       }
-       return clientHandler.getRPCResponse(rpcRequest.getRequestId());
+    public RPCResponse send(final RPCRequest rpcRequest) {
+        try {
+            channel.writeAndFlush(rpcRequest).await();
+        } catch (InterruptedException e) {
+            log.error("发送数据失败", e);
+        }
+        return clientHandler.getRPCResponse(rpcRequest.getRequestId());
     }
 
     @PreDestroy
-    public void close(){
+    public void close() {
         //关闭通道，同步不可中断
         eventLoopGroup.shutdownGracefully();
         channel.closeFuture().syncUninterruptibly();
-
     }
 }
