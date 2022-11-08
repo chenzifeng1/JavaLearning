@@ -10,9 +10,9 @@
 
 
 #### 倒排表的压缩算法
-1. FOR：frame of reference
+1. FOR：frame of reference （适合稠密数组）
     
-2. RBM： Roaring Bitmap
+2. RBM： Roaring Bitmap （适合稀疏数组）
 
 #### 词项索引的压缩算法
 1. FST: Finit state Transducers
