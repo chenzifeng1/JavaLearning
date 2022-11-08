@@ -11,8 +11,10 @@
 
 #### 倒排表的压缩算法
 1. FOR：frame of reference （适合稠密数组）
+- 通过相邻倒排表数据做差来压缩数据长度
     
 2. RBM： Roaring Bitmap （适合稀疏数组）
+- 通过相邻倒排表数据除以 65536 获取 得数和余数 来压缩
 
 #### 词项索引的压缩算法
 1. FST: Finit state Transducers
