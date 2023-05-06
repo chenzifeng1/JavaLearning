@@ -6,6 +6,15 @@
 - 结果准确：BM25 / TF-IDF
 - 检索结果丰富： 召回率
 
+### 前缀树
+共享相同前缀，但是后缀不共享，在存储时也没有办法做到极致复用。
+![image](https://user-images.githubusercontent.com/17842768/236600656-30bb85d3-13fc-4dd5-8257-a140305943cf.png)
+
+
+### FST （有限状态转换机）
+FSM （finite state machines）
+
+
 ### 压缩算法
 
 
