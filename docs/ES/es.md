@@ -20,9 +20,9 @@ FSM （finite state machines）
 4. 状态是无序的
 
 FSM 相对于前缀树，可以对词条后缀也进行复用，进一步压缩了数据存储空间。
-![image](https://user-images.githubusercontent.com/17842768/236736242-5d0810c8-7d57-4474-a55a-d4f9d5583816.png)
+![image](https://user-images.githubusercontent.com/17842768/236736242-5d0810c8-7d57-4474-a55a-d4f9d5583816.png)  
 FSM通过指定final-node来匹配词项的检索结束条件  
-同时FST还有以下几个特性：
+同时FSM还有以下几个特性：
 - 确定性:在任何给定状态下，对于任何一个输入，都只能遍历一个transition。即FST是有向的
 - 非循环性:不可能重复遍历同一个状态。只能沿有向边匹配到final节点或者匹配不到词项
 - Final的唯一性:当且仅当有限状态机在输入序列的末尾处于终止（final）状态时，才能『接受』输入序列  
