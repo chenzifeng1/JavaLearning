@@ -20,6 +20,12 @@ Mysql的B+树索引为什么不能解决大数据检索的问题
 
 
 ## 倒排索引
+![image](https://github.com/chenzifeng1/JavaLearning/assets/17842768/2b22d01b-8e5e-4523-b086-6480885243ac)
+数据结构
+1. 倒排表
+2. 词项字典
+3. 词项索引
+
 
 
 ### 前缀树
