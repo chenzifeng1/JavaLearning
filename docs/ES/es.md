@@ -57,6 +57,7 @@ FST最大的特点就是可以实现KEY-VALUE的映射，相当于HashMap<Key,Va
 
 #### 倒排表的压缩算法
 1. FOR：frame of reference （适合稠密数组）
+![image](https://github.com/chenzifeng1/JavaLearning/assets/17842768/82b90fe0-03d1-4330-afb3-279b1c4720f6)
 - 通过相邻倒排表数据做差来压缩数据长度
     
 2. RBM： Roaring Bitmap （适合稀疏数组）
