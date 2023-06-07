@@ -58,7 +58,10 @@ FST最大的特点就是可以实现KEY-VALUE的映射，相当于HashMap<Key,Va
 #### 倒排表的压缩算法
 1. FOR：frame of reference （适合稠密数组）
 ![image](https://github.com/chenzifeng1/JavaLearning/assets/17842768/82b90fe0-03d1-4330-afb3-279b1c4720f6)
-- 通过相邻倒排表数据做差来压缩数据长度
+- 通过相邻倒排表数据做差来压缩数据长度  
+- 倒排表中，某个词项对应的文档id列表比较稠密时，比如，100W个文档id，存储的是int类型，所占用的存储空间是400Wbyte。
+- FOR压缩算法，将id集合分组，每组中id的范围近似，可以以分组中最大的id值为存储边界。比如说某个分组中有10个元素，最大的id为220，可以用8bit即1byte的空间来存储
+- 该分组如果没有压缩，存储的空间为40byte，压缩之后，存储的空间为10byte+1Byte，其中10byte为数据空间，1byte为标记空间（标记分组元素占用空间大小）。
     
 2. RBM： Roaring Bitmap （适合稀疏数组）
 - 通过相邻倒排表数据除以 65536 获取 得数和余数 来压缩
