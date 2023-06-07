@@ -64,6 +64,8 @@ FST最大的特点就是可以实现KEY-VALUE的映射，相当于HashMap<Key,Va
 - 该分组如果没有压缩，存储的空间为40byte，压缩之后，存储的空间为10byte+1Byte，其中10byte为数据空间，1byte为标记空间（标记分组元素占用空间大小）。
     
 2. RBM： Roaring Bitmap （适合稀疏数组）
+<img width="775" alt="image" src="https://github.com/chenzifeng1/JavaLearning/assets/17842768/8cb59e4d-bd13-4bc4-bf64-8387bb2da65d">
+
 - 通过相邻倒排表数据除以 65536 获取 得数和余数 来压缩
 
 #### 词项索引的压缩算法
