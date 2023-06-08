@@ -65,12 +65,13 @@ FST最大的特点就是可以实现KEY-VALUE的映射，相当于HashMap<Key,Va
     
 2. RBM： Roaring Bitmap （适合稀疏数组）
 <img width="775" alt="image" src="https://github.com/chenzifeng1/JavaLearning/assets/17842768/8cb59e4d-bd13-4bc4-bf64-8387bb2da65d">
-- 对于倒排表中，文档id为稀疏数组的情况，再用差值计算难以节约空间。
-- 将文档id除以65535，得到除数和余数。除数和余数的取值范围都小于等于2的16次方
-- 且对于某个词项来说，关联的文档id不会存在重复。在这种情况下，除数可以用short类型的数组来存放，余数则采用container来存放
-- container分为两种类型；1. ArrayContainer 2. BitmapContainer 
-- ArrayContiner每个余数用short类型存放，一个short占用2字节。如图所示，6个文档id如果直接存储占用了6*4=24字节，采用ArrayContiner共花费2*3+2*6= 18字节
-- BitmapContainer： 当文档id很多时，直接存储余数也比较消耗空间。于是用bitmap的方式代表对应余数是否存在，每个container里面元素的取值范围为0-65535，且不会重复。那么我们采用一个65536位的bit可以覆盖所有情况
+
+- 对于倒排表中，文档id为稀疏数组的情况，再用差值计算难以节约空间。  
+- 将文档id除以65535，得到除数和余数。除数和余数的取值范围都小于等于2的16次方  
+- 且对于某个词项来说，关联的文档id不会存在重复。在这种情况下，除数可以用short类型的数组来存放，余数则采用container来存放  
+- container分为两种类型；1. ArrayContainer 2. BitmapContainer   
+- ArrayContiner每个余数用short类型存放，一个short占用2字节。如图所示，6个文档id如果直接存储占用了6*4=24字节，采用ArrayContiner共花费2*3+2*6= 18字节  
+- BitmapContainer： 当文档id很多时，直接存储余数也比较消耗空间。于是用bitmap的方式代表对应余数是否存在，每个container里面元素的取值范围为0-65535，且不会重复。那么我们采用一个65536位的bit可以覆盖所有情况  
 - 通过相邻倒排表数据除以 65536 获取 得数和余数 来压缩
 
 #### 词项索引的压缩算法
