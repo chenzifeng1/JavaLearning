@@ -26,11 +26,32 @@ Mysql的B+树索引为什么不能解决大数据检索的问题
 2. 词项字典
 3. 词项索引
 
+### 压缩算法
+
+#### 倒排表的压缩算法
+1. FOR：frame of reference （适合稠密数组）
+![image](https://github.com/chenzifeng1/JavaLearning/assets/17842768/82b90fe0-03d1-4330-afb3-279b1c4720f6)
+- 通过相邻倒排表数据做差来压缩数据长度  
+- 倒排表中，某个词项对应的文档id列表比较稠密时，比如，100W个文档id，存储的是int类型，所占用的存储空间是400Wbyte。
+- FOR压缩算法，将id集合分组，每组中id的范围近似，可以以分组中最大的id值为存储边界。比如说某个分组中有10个元素，最大的id为220，可以用8bit即1byte的空间来存储
+- 该分组如果没有压缩，存储的空间为40byte，压缩之后，存储的空间为10byte+1Byte，其中10byte为数据空间，1byte为标记空间（标记分组元素占用空间大小）。
+    
+2. RBM： Roaring Bitmap （适合稀疏数组）
+<img width="775" alt="image" src="https://github.com/chenzifeng1/JavaLearning/assets/17842768/8cb59e4d-bd13-4bc4-bf64-8387bb2da65d">
+
+- 对于倒排表中，文档id为稀疏数组的情况，再用差值计算难以节约空间。  
+- 将文档id除以65535，得到除数和余数。除数和余数的取值范围都小于等于2的16次方  
+- 且对于某个词项来说，关联的文档id不会存在重复。在这种情况下，除数可以用short类型的数组来存放，余数则采用container来存放  
+- container分为两种类型；1. ArrayContainer 2. BitmapContainer   
+- ArrayContiner每个余数用short类型存放，一个short占用2字节。如图所示，6个文档id如果直接存储占用了6*4=24字节，采用ArrayContiner共花费2*3+2*6= 18字节  
+- BitmapContainer： 当文档id很多时，直接存储余数也比较消耗空间。于是用bitmap的方式代表对应余数是否存在，每个container里面元素的取值范围为0-65535，且不会重复。那么我们采用一个65536位的bit可以覆盖所有情况  
+- 通过相邻倒排表数据除以 65536 获取 得数和余数 来压缩
 
 
 ### 前缀树
 共享相同前缀，但是后缀不共享，在存储时也没有办法做到极致复用。
-![image](https://user-images.githubusercontent.com/17842768/236600656-30bb85d3-13fc-4dd5-8257-a140305943cf.png)
+![image](https://user-images.githubusercontent.com/17842768/236600656-30bb85d3-13fc-4dd5-8257-a140305943cf.png)  
+词项都是按照字典序排序的，因此可以确定词项中哪些到了终止节点
 
 
 ### FST （有限状态转换机）
@@ -52,27 +73,15 @@ FSM通过指定final-node来匹配词项的检索结束条件
 FST最大的特点就是可以实现KEY-VALUE的映射，相当于HashMap<Key,Value>，但是查询速度上不如HashMap快  
 但是FST极大压缩了存储空间，降低了内存消耗，且在Lucence中有很多应用，比如说：倒排索引存储，同义词存储，搜索关键字建议等。
 
-### 压缩算法
+#### FST在luncene的实现
+![image](https://github.com/chenzifeng1/JavaLearning/assets/17842768/3cb26699-e991-4fdc-949a-2ae6d438179c)
+当输入abda词项时
+![image](https://github.com/chenzifeng1/JavaLearning/assets/17842768/43679474-73f5-464a-9b4d-6bd25360c655)
+输入abdb词项时
+![image](https://github.com/chenzifeng1/JavaLearning/assets/17842768/38ecc9a6-a603-4b81-a352-01b93d463d8d)
 
 
-#### 倒排表的压缩算法
-1. FOR：frame of reference （适合稠密数组）
-![image](https://github.com/chenzifeng1/JavaLearning/assets/17842768/82b90fe0-03d1-4330-afb3-279b1c4720f6)
-- 通过相邻倒排表数据做差来压缩数据长度  
-- 倒排表中，某个词项对应的文档id列表比较稠密时，比如，100W个文档id，存储的是int类型，所占用的存储空间是400Wbyte。
-- FOR压缩算法，将id集合分组，每组中id的范围近似，可以以分组中最大的id值为存储边界。比如说某个分组中有10个元素，最大的id为220，可以用8bit即1byte的空间来存储
-- 该分组如果没有压缩，存储的空间为40byte，压缩之后，存储的空间为10byte+1Byte，其中10byte为数据空间，1byte为标记空间（标记分组元素占用空间大小）。
-    
-2. RBM： Roaring Bitmap （适合稀疏数组）
-<img width="775" alt="image" src="https://github.com/chenzifeng1/JavaLearning/assets/17842768/8cb59e4d-bd13-4bc4-bf64-8387bb2da65d">
 
-- 对于倒排表中，文档id为稀疏数组的情况，再用差值计算难以节约空间。  
-- 将文档id除以65535，得到除数和余数。除数和余数的取值范围都小于等于2的16次方  
-- 且对于某个词项来说，关联的文档id不会存在重复。在这种情况下，除数可以用short类型的数组来存放，余数则采用container来存放  
-- container分为两种类型；1. ArrayContainer 2. BitmapContainer   
-- ArrayContiner每个余数用short类型存放，一个short占用2字节。如图所示，6个文档id如果直接存储占用了6*4=24字节，采用ArrayContiner共花费2*3+2*6= 18字节  
-- BitmapContainer： 当文档id很多时，直接存储余数也比较消耗空间。于是用bitmap的方式代表对应余数是否存在，每个container里面元素的取值范围为0-65535，且不会重复。那么我们采用一个65536位的bit可以覆盖所有情况  
-- 通过相邻倒排表数据除以 65536 获取 得数和余数 来压缩
 
 #### 词项索引的压缩算法
 1. FST: Finit state Transducers
