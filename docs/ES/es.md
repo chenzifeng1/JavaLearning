@@ -74,11 +74,11 @@ FST最大的特点就是可以实现KEY-VALUE的映射，相当于HashMap<Key,Va
 但是FST极大压缩了存储空间，降低了内存消耗，且在Lucence中有很多应用，比如说：倒排索引存储，同义词存储，搜索关键字建议等。
 
 #### FST在luncene的实现
-![image](https://github.com/chenzifeng1/JavaLearning/assets/17842768/3cb26699-e991-4fdc-949a-2ae6d438179c)
-当输入abda词项时
-![image](https://github.com/chenzifeng1/JavaLearning/assets/17842768/43679474-73f5-464a-9b4d-6bd25360c655)
-输入abdb词项时
-![image](https://github.com/chenzifeng1/JavaLearning/assets/17842768/38ecc9a6-a603-4b81-a352-01b93d463d8d)
+![image](https://github.com/chenzifeng1/JavaLearning/assets/17842768/3cb26699-e991-4fdc-949a-2ae6d438179c)  
+当输入abda词项时  
+![image](https://github.com/chenzifeng1/JavaLearning/assets/17842768/43679474-73f5-464a-9b4d-6bd25360c655)  
+输入abdb词项时  
+![image](https://github.com/chenzifeng1/JavaLearning/assets/17842768/38ecc9a6-a603-4b81-a352-01b93d463d8d)  
 
 
 
