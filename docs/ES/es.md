@@ -80,8 +80,10 @@ FST最大的特点就是可以实现KEY-VALUE的映射，相当于HashMap<Key,Va
 输入abdb词项时  
 ![image](https://github.com/chenzifeng1/JavaLearning/assets/17842768/38ecc9a6-a603-4b81-a352-01b93d463d8d)  
 
-
-
-
 #### 词项索引的压缩算法
 1. FST: Finit state Transducers
+
+
+## tim和tip文件的内部结构
+![image](https://github.com/chenzifeng1/JavaLearning/assets/17842768/0a46b275-3798-4812-8a41-d838d2aef744)
+
