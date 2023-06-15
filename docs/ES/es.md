@@ -80,6 +80,18 @@ FST最大的特点就是可以实现KEY-VALUE的映射，相当于HashMap<Key,Va
 输入abdb词项时  
 ![image](https://github.com/chenzifeng1/JavaLearning/assets/17842768/38ecc9a6-a603-4b81-a352-01b93d463d8d)  
 
+Node:
+用来描述节点状态，有两种类型的node：  
+1. UnCompileNode
+2. CommileNode。
+ 
+forntier[]: 
+用来存放UnCompileNode，待处理的节点Arc
+
+ByteStore bytes current[]:
+用来存储CompileNode的二进制数组
+
+
 #### 词项索引的压缩算法
 1. FST: Finit state Transducers
 
