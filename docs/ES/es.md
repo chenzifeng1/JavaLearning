@@ -82,14 +82,17 @@ FST最大的特点就是可以实现KEY-VALUE的映射，相当于HashMap<Key,Va
 
 Node:
 用来描述节点状态，有两种类型的node：  
-1. UnCompileNode
-2. CommileNode。
+1. UnCompileNode：未 处理的节点
+2. CommileNode： 处理过的节点，从内存中取出转化为二进制的字节数组落在磁盘中
  
 forntier[]: 
 用来存放UnCompileNode，待处理的节点Arc
 
 ByteStore bytes current[]:
 用来存储CompileNode的二进制数组
+
+PendingTerm：每个字符都是一个PendingTerm
+PendingBlock：将多个PeningTerm组合在一起的块
 
 
 #### 词项索引的压缩算法
