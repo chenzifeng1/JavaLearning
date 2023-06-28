@@ -102,3 +102,13 @@ PendingBlock：将多个PeningTerm组合在一起的块
 ## tim和tip文件的内部结构
 ![image](https://github.com/chenzifeng1/JavaLearning/assets/17842768/0a46b275-3798-4812-8a41-d838d2aef744)
 
+
+# ES基础知识
+## 路由计算
+当客户端向ES的协调节点发送一条数据写入请求时，协调节点通过以下公式来计算数据应该存储在哪个分片中：  
+ - shard = hash(routing)%number_of_primary_shards  
+存储分片的id = routing（用户可以自定义，默认取文档id）的hash值 对 索引对应的分片数量取余数。 
+比如说，文档id的hash值是100，一个索引对应的分片数量是5，那么该数据在写入时就会被分配到分片20
+这也是为何索引对应的分片数量无法改变的原因，一旦改变，计算数据写入分片时就会与原来的不一致，在读取数据的时候可能找不到原有的存储分片
+   
+
