@@ -129,7 +129,7 @@ curl -H "Contenet-Type:application/json" -XPUT http://127.0.0.1:9200/hotel -d
             },
             "price":{
                 "type":"double"
-            },
+            }
         }
     }
 }
