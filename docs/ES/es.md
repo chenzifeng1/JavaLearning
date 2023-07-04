@@ -135,5 +135,23 @@ curl -H "Contenet-Type:application/json" -XPUT http://127.0.0.1:9200/hotel -d
 }
 ```
 
+## ES的数据结构
+#### keyword
+keyword类型是不进行切分的字符串类型，指的是：在索引时，对keyword类型的数据不进行切词，直接构建倒排索引，且匹配时使用精准匹配，而不是模糊匹配。keyword类型的数据一般用于文档的过滤，排序和聚合。
+
+#### text
+text类型是可以进行切分的字符串类型，指的是：在索引时，可以按照相应的切词算法将text的数据进行词义划分，然后根据每个词项创建倒排索引。在搜索时，对该类型的查询字符串按照用户的切词算法进行切分，然后对切分后的模糊匹配程度进行打分。
+
+#### 数值类型
+ES支持的数值类型有long，integer，short，byte，double，float，half_float,scaled_float和unsigned_long等。
+
+#### 布尔类型
+写入或者查询该类型的数据时，其值可以使用true和false，或者使用字符串的"true" or "false"
+
+#### 日期类型
+在ES中，日期类型的名称为date，存储的日期时标准的UTC格式，一般使用如下形式表示日期格式的数据：
+    1. 格式化的日期字符串
+    2. 毫秒级的长整型
+    3. 秒级的整型
 
 
