@@ -155,3 +155,35 @@ ES支持的数值类型有long，integer，short，byte，double，float，half_
     3. 秒级的整型
 
 
+## 检索
+
+### 评分分析
+使用搜索引擎时，一般都会涉及到排序功能，如果用户不指定按照某个字段升序或者降序排列，那么ES会使用自己的打分算法对文档进行排序。如果我们需要知道某个文档具体的打分详情，以便于对搜素的DSL进行优化，可以使用explain功能来查看搜素时的匹配详情。    
+```
+GET /${index_name}/_explain/${doc_id}
+{
+    "query":{
+        ......
+    }
+}
+
+```
+
+### 检索所有文档
+类似sql里面的```select * from table_name;```。 es里面也有查询所有文档数据的方法，match_all查询文档时，es不会对文档进行打分计算，默认情况下给所有文档赋予1.0的得分，用户可以通过boost参数来设定赋予的分值，使用方法如下：  
+```
+GET /host/_search
+{
+    "_source":[
+        "title":,
+        "city"
+    ],
+    "query":{
+        "match_all": {
+            "boost":2
+        }
+    }
+}
+```
+
+
