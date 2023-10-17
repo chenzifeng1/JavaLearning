@@ -1,5 +1,4 @@
-package com.baidu.mapcloud.tuju.datacenter.algorithm;
-
+package algorithm;
 import java.util.Arrays;
 
 /**
