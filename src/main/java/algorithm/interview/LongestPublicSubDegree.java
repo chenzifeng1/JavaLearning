@@ -1,4 +1,4 @@
-package org.algorithm;
+package algorithm.interview;
 
 /**
  * @author chenzifeng
