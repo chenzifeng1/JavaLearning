@@ -53,6 +53,32 @@ public class MinimumGroupAccumulatedSum {
         int p2 = process(arr, index + 1, rest);
         return Math.max(p1, p2);
     }
+    public static int process1(int[] arr) {
+        int length = arr.length;
+        if (length <= 1) {
+            return 0;
+        }
+        int sum = 0;
+        for (int i : arr) {
+            sum += i;
+        }
+        int rest = sum >> 1;
 
+        int[][] dp = new int[length + 1][rest + 1];
+
+        for (int i = length - 1; i >= 0; i--) {
+            for (int j = 0; j <= rest; j++) {
+                int p1 = 0;
+                if (arr[i] <= j) {
+                    p1 = arr[i] + dp[i + 1][j - arr[i]];
+                }
+                // 不拿这个值
+                int p2 = dp[i + 1][j];
+                dp[i][j] = Math.max(p1, p2);
+            }
+        }
+
+        return dp[0][rest];
+    }
 
 }
