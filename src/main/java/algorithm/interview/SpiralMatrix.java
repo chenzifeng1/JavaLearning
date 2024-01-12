@@ -24,46 +24,44 @@ package org.algorithm;
  */
 public class SpiralMatrix {
 
-    public static void main(String[] args) {
+   public static void main(String[] args) {
+//        int[][] matrix = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}};
+        int[][] matrix = {{1,2,3}, { 4,5,6}, {7,8,9}};
+//        int[][] matrix = {{7, 8, 9}};
+        List<Integer> process = process(matrix);
+        System.out.println(process);
 
     }
 
 
-    public static int[] process(int[][] matrix) {
+    public static List<Integer> process(int[][] matrix) {
         int m = matrix.length;
         int n = matrix[0].length;
 
-        int rowStart = 0, rowEnd = n;
-        int colStart = 0, colEnd = m;
+        int rowStart = 0, rowEnd = n - 1;
+        int colStart = 0, colEnd = m - 1;
 
-        int index = 0;
-
-
-        int[] result = new int[m * n];
-        while (rowStart < rowEnd && colStart < colEnd) {
+        List<Integer> result = new ArrayList<>();
+        while (rowStart <= rowEnd && colStart <= colEnd) {
             // 第一行 去调最后一个元素
-            for (int i = rowStart; i < rowEnd - 1; i++) {
-                result[index++] = matrix[colStart][i];
+            for (int i = rowStart; i <= rowEnd; i++) {
+                result.add(matrix[colStart][i]);
             }
-            for (int i = colStart; i < colEnd - 1; i++) {
-                result[index++] = matrix[i][rowEnd];
+            for (int i = colStart + 1; i <= colEnd; i++) {
+                result.add(matrix[i][rowEnd]);
             }
-            for (int i = rowEnd; i > rowStart + 1; i--) {
-                result[index++] = matrix[rowEnd][i];
-            }
-            for (int i = colEnd; i > colStart + 1; i--) {
-                result[index++] = matrix[i][rowStart];
+            if (rowStart < rowEnd && colStart < colEnd) {
+                for (int i = rowEnd-1; i >= rowStart + 1; i--) {
+                    result.add(matrix[colEnd][i]);
+                }
+                for (int i = colEnd; i >= colStart + 1; i--) {
+                    result.add(matrix[i][rowStart]);
+                }
             }
             rowStart++;
             rowEnd--;
             colStart++;
-            colStart--;
-        }
-        while (rowStart < rowEnd) {
-            result[index++] = matrix[rowStart++][colStart];
-        }
-        while (colStart < colEnd) {
-            result[index++] = matrix[rowStart][colStart++];
+            colEnd--;
         }
 
         return result;
