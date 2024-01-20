@@ -9,7 +9,6 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.annotation.PreDestroy;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -122,7 +121,7 @@ public class NettyClient {
         return clientHandler.getRPCResponse(rpcRequest.getRequestId());
     }
 
-    @PreDestroy
+
     public void close() {
         //关闭通道，同步不可中断
         eventLoopGroup.shutdownGracefully();

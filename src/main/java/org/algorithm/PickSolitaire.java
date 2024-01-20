@@ -1,4 +1,4 @@
-
+package org.algorithm;
 /**
  * @author chenzifeng
  * @version 1.0

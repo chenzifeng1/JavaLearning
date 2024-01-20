@@ -1,5 +1,7 @@
 package org.algorithm;
 
+import algorithm.interview.LongestPublicSubDegree;
+
 /**
  * @author chenzifeng
  * @version 1.0

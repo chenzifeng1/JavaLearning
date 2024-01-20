@@ -28,7 +28,7 @@ import java.util.List;
  * 1 <= n <= 9
  * @date 2023/12/27 11:12 PM
  */
-public class NQueens {
+public class NQueue {
 
 
     public static void main(String[] args) {
