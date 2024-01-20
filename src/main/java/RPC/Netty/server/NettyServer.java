@@ -12,7 +12,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.annotation.PreDestroy;
 import javax.imageio.spi.ServiceRegistry;
 import java.util.ArrayList;
 
@@ -80,7 +79,7 @@ public class NettyServer implements InitializingBean {
         });
     }
 
-    @PreDestroy
+
     public void destory() throws InterruptedException{
         boss.shutdownGracefully().sync();
         worker.shutdownGracefully().sync();
