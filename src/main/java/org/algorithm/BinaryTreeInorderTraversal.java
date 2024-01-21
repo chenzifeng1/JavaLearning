@@ -30,6 +30,7 @@ public class BinaryTreeInorderTraversal {
 
     /**
      * 中序便利，左根右 迭代版本
+     *
      * @param root
      * @return
      */
@@ -37,26 +38,21 @@ public class BinaryTreeInorderTraversal {
         Stack<TreeNode> stack = new Stack<>();
         List<Integer> result = new ArrayList<>();
         stack.add(root);
-
-        while(stack.size()!=0) {
+        while (!stack.isEmpty() || root !=null) {
+            while (root!= null) {
+                stack.add(root.left);
+                root = root.left;
+            }
             TreeNode pop = stack.pop();
-            if (pop==null) {
-                continue;
-            }
             result.add(pop.val);
-            if (pop.right!=null) {
-                stack.add(pop.right);
-            }
-            if (pop.left!=null) {
-                stack.add(pop.left);
-            }
+            root = pop.right;
         }
         return result;
     }
 
 
     public void inorderTraversal(TreeNode root, List<Integer> list) {
-        if (root==null) {
+        if (root == null) {
             return;
         }
         inorderTraversal(root.left, list);
