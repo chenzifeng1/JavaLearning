@@ -44,6 +44,9 @@ public class BinaryTreeInorderTraversal {
                 root = root.left;
             }
             TreeNode pop = stack.pop();
+            if (pop==null) {
+                continue;
+            }
             result.add(pop.val);
             root = pop.right;
         }
